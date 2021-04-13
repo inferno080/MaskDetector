@@ -1,5 +1,6 @@
 import cv2
-
+from gtts import gTTS
+from playsound import playsound
 # Enable Webcam
 
 Livefeed = cv2.VideoCapture(0)
@@ -29,7 +30,10 @@ while True:
 
     for (x, y, w, h) in masks:
         cv2.rectangle(Gourmet, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
+        Message = "Mask detected"
+        speech = gTTS(text=Message)
+        speech.save('MaskAudio.mp3')
+        playsound('MaskAudio.mp3')
 
     cv2.imshow("Video", Gourmet)
     if cv2.waitKey(1) & 0XFF == ord('q'):
